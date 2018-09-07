@@ -1,6 +1,7 @@
 package com.pramudana.sam.apijakgo.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -85,10 +86,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             holder.name.setText(dataItems.get(position).getNama());
             holder.phone.setText(dataItems.get(position).getPhone());
             holder.wilayah.setText(dataItems.get(position).getWilayah());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, DetailActivity.class)
+                            .putExtra("nama", dataItems.get(position).getNama())
+                            .putExtra("phone", dataItems.get(position).getPhone())
+                            .putExtra("wilayah", dataItems.get(position).getWilayah())
+                            .putExtra("alamat", dataItems.get(position).getAlamat())
+                            .putExtra("jabatan", dataItems.get(position).getJabatan())
+                            .putExtra("login", dataItems.get(position).getLoginTerakhir())
+                    );
+                }
+            });
         }
 
         @Override
